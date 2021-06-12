@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { Food } from '../Components/Model'
-import data from '../Menu';
+import { Food, Menu } from '../Components/Model'
+// import data from '../Menu';
 import Card from '../Components/Card'
 import Swiper from 'react-native-deck-swiper';
 
@@ -11,6 +11,23 @@ export default function Swipes () {
   const [likes, setLikes] = useState([]);
   const [isComplete, setIsCompleted] = useState(false)
   const [result, setResult] = useState({})
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    console.log('in fetch effect')
+    getData()
+  }, [])
+
+  async function getData () {
+    try {
+      const res = await fetch('http://10.10.22.67:3000/menu')
+      const json = await res.json()
+      console.log('json', json)
+      setData(json)
+    } catch (err) {
+      console.log('fetching error', err)
+    }
+  }
   
   const onSwiped = (card:number) => {
     console.log(data.items[card].title)
@@ -26,13 +43,19 @@ export default function Swipes () {
   }
 
   useEffect(() => {
-    console.log('in effect')
     const random = Math.floor(Math.random() *likes.length)
     console.log(random)
     setResult(likes[random])
   },[isComplete])
 
-
+  
+  if (data.length ===0) {
+    return (
+      <SafeAreaView>
+        <Text> Loading...</Text>
+      </SafeAreaView>
+    )
+  }
 
   if (result) {
     return (

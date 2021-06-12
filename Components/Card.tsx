@@ -12,7 +12,7 @@ const Card = ({card, color}) => {
     <View style={[styles.card, result]}>
       <Text style={styles.cardEmoji}>{card.emoji}</Text>
       <Text style={styles.cardTitle}>{card.title} </Text>
-      <Text style={styles.cardDescription}>{card.description} </Text>
+      <Text style={styles.cardDescription}>{card.additionalInfo} </Text>
     </View>
 
   )

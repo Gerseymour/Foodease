@@ -1,11 +1,11 @@
-import React from 'react';
-import {View} from 'react-native'
+// import React from 'react';
+// import {View} from 'react-native'
 
-const Results = () => {
-  return (
+// const Results = () => {
+//   return (
 
 
-  )
-}
+//   )
+// }
 
-export default Results 
+// export default Results 

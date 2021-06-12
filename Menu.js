@@ -6,61 +6,71 @@ module.exports = {
       id: '1',
       title:'pizza',
       emoji:'🍕',
-      description:'Pepperoni, Hawaiian, Margarita'
+      additionalInfo:'Pepperoni, Hawaiian, Margarita',
+      like:false
     },
     {
       id: '2',
       title:'thai',
       emoji:'🍜',
-      description:'Pad Thai, Papya Salad, Pad Seewo'
+      additionalInfo:'Pad Thai, Papya Salad, Pad Seewo',
+      like:false
     },
     {
       id: '3',
       title:'vietnamese',
       emoji:'🥪',
-      description:'Bahn Mi, Pho, Bun Bo'
+      additionalInfo:'Bahn Mi, Pho, Bun Bo',
+      like:false
     },
     {
       id: '4',
       title:'sushi',
       emoji:'🍣',
-      description:'Tempura, Sushi, Udon'
+      additionalInfo:'Tempura, Sushi, Udon',
+      like:false
     },
     {
       id: '5',
       title:'burgers',
       emoji:'🍔',
-      description:'Chicken, Burgers, Milkshakes'
+      additionalInfo:'Chicken, Burgers, Milkshakes',
+      like:false
     },
     {
       id: '6',
       title:'chinese',
       emoji:'🥡',
-      description:'Noodles, Dumplings, Rice'
+      additionalInfo:'Noodles, Dumplings, Rice',
+      like:false
     },
     {
       id: '7',
       title:'fish&chips',
       emoji:'🐠',
-      description:'Fish, Chips, Battered Sausage'
+      additionalInfo:'Fish, Chips, Battered Sausage',
+      like:false
     },
     {
       id: '8',
       title:'kebab',
       emoji:'🧆',
-      description:'Donner, Dolmades, Spanicopita'
+      additionalInfo:'Donner, Dolmades, Spanicopita',
+      like:false
     },
     {
       id: '9',
       title:'greek',
       emoji:'🌯',
-      description:'Shwarma, Souvlaki, Squid'
+      additionalInfo:'Shwarma, Souvlaki, Squid',
+      like:false
     },
     {
       id: '10',
       title:'indian',
       emoji:'🍛',
-      description:'Madras, Briyana, Tandoori'
+      additionalInfo:'Madras, Briyana, Tandoori',
+      like:false
     },
     
   ]

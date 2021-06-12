@@ -1,12 +1,13 @@
+export interface Food {
+  id:string;
+  title:string;
+  emoji:string;
+  additionalInfo:string;
+  like:boolean;
+}
+
 export interface Menu {
   id:string;
   title: string;
-  item: [Food]
-}
-
-export interface Food {
-  id:string;
-  title: string;
-  emoji: string;
-  description: string;
+  items: Food[]
 }
