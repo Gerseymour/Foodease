@@ -11,3 +11,8 @@ export interface Menu {
   title: string;
   items: Food[]
 }
+
+export interface MenuItem {
+  id:string;
+  title: string;
+}

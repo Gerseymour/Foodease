@@ -5,13 +5,15 @@ import { Food, Menu } from '../Components/Model'
 import Card from '../Components/Card'
 import Swiper from 'react-native-deck-swiper';
 
-export default function Swipes () {
+export default function Swipes ({route}) {
 
   const [index, setIndex] = useState(0);
   const [likes, setLikes] = useState([]);
   const [isComplete, setIsCompleted] = useState(false)
   const [result, setResult] = useState({})
   const [data, setData] = useState([])
+  const {title, id} = route.params
+
 
   useEffect(() => {
     console.log('in fetch effect')
@@ -20,7 +22,7 @@ export default function Swipes () {
 
   async function getData () {
     try {
-      const res = await fetch('http://10.10.22.67:3000/menu')
+      const res = await fetch(`http://10.10.22.67:3000/menu/${id}`)
       const json = await res.json()
       console.log('json', json)
       setData(json)
