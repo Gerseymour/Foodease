@@ -12,17 +12,18 @@ export default function Swipes ({route}) {
   const [isComplete, setIsCompleted] = useState(false)
   const [result, setResult] = useState({})
   const [data, setData] = useState([])
-  const {title, id} = route.params
+  const {title, _id} = route.params
 
 
   useEffect(() => {
+    console.log('params',route.params)
     console.log('in fetch effect')
     getData()
   }, [])
 
   async function getData () {
     try {
-      const res = await fetch(`http://10.10.22.67:3000/menu/${id}`)
+      const res = await fetch(`http://10.10.22.147:3000/menu/${_id}`)
       const json = await res.json()
       console.log('json', json)
       setData(json)
