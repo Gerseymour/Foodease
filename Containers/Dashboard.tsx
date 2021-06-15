@@ -1,16 +1,24 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import {TouchableOpacity, SafeAreaView, Text, FlatList, ScrollView, StyleSheet} from 'react-native';
+import {TouchableOpacity, SafeAreaView,StatusBar, Text, FlatList, ScrollView, StyleSheet} from 'react-native';
+
+
+const Item = ({ item, onPress, backgroundColor, textColor}) => (
+  <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
+    <Text style={[styles.title, textColor]}>{item.title}</Text>
+  </TouchableOpacity>)
+const FriendItem = ({ item, onPress, backgroundColor, textColor }) => (
+  <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
+    <Text style={[styles.title, textColor]}>{item.username}</Text>
+  </TouchableOpacity>)
 
 const Dashboard = ({navigation, route}) => {
  const [menuList, setMenuList] = useState([])
- const [open, setOpen] = useState(false);
- const [value, setValue] = useState(null);
  const [friendsList, setFriendsList] = useState([])
- const [selectedId, setSelectedId] = useState(null)
+ const [selectedMenuId, setSelectedMenuId] = useState('')
+ const [selectedFriendId, setSelectedFriendId] = useState('')
  
 
- console.log(route)
 
   useEffect(() => {
     getMenuList()
@@ -46,12 +54,40 @@ const Dashboard = ({navigation, route}) => {
     }
   }
 
-  const renderItem = ({item}) => (
-    <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-    <Text style={[styles.title, textColor]}>{item.title}</Text>
-  </TouchableOpacity>
-  )
+  const renderMenuItem = ({item}) => {
+    const backgroundColor = item._id === selectedMenuId._id ? "#6e3b6e" : "#f9c2ff";
+    const color = item._id === selectedMenuId._id ? 'white' : 'black';
+
+    return (
+      <Item
+        item={item}
+        onPress={() => setSelectedMenuId(item)}
+        backgroundColor={{ backgroundColor }}
+        textColor={{ color }}
+      />
+    );
+    }
+    const renderFriendItem = ({item}) => {
+      const backgroundColor = item._id === selectedFriendId._id ? "#6e3b6e" : "#f9c2ff";
+      const color = item._id === selectedFriendId._id ? 'white' : 'black';
   
+      return (
+        <FriendItem
+          item={item}
+          onPress={() => setSelectedFriendId(item)}
+          backgroundColor={{ backgroundColor }}
+          textColor={{ color }}
+        />
+      );
+      }
+
+      const sendSession = () => {
+        console.log(selectedFriendId)
+        console.log(selectedMenuId)
+        console.log(route.params)
+      }
+
+
   if (menuList.length === 0 ) {
     return (
       <SafeAreaView>  
@@ -62,20 +98,46 @@ const Dashboard = ({navigation, route}) => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
      <FlatList 
      data = {menuList}
-     renderItem = {renderItem}
+     renderItem = {renderMenuItem}
      keyExtractor ={item => item._id}
+     extraData = {selectedMenuId}
+     ListHeaderComponent= {<Text>Menus</Text>}
+    />
+    <FlatList 
+     data = {friendsList}
+     renderItem = {renderFriendItem}
+     keyExtractor ={item => item._id}
+     extraData = {selectedFriendId}
+     ListHeaderComponent= {<Text>Friends</Text>}
+
 
     />
 
  
-    <TouchableOpacity><Text>Send</Text></TouchableOpacity>
-    </ScrollView>
+    <TouchableOpacity
+      onPress = {() => sendSession()}
+    
+    ><Text>Send</Text></TouchableOpacity>
 
   </SafeAreaView>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
+  },
+  item: {
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
+  },
+});
 
 export default Dashboard
