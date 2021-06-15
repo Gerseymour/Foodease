@@ -17,7 +17,7 @@ const Dashboard = ({navigation, route}) => {
  const [friendsList, setFriendsList] = useState([])
  const [selectedMenuId, setSelectedMenuId] = useState('')
  const [selectedFriendId, setSelectedFriendId] = useState('')
- 
+ const [data, setData] = useState(null)
 
 
   useEffect(() => {
@@ -47,7 +47,12 @@ const Dashboard = ({navigation, route}) => {
     try {
       const resFriends = await fetch('http://10.10.22.147:3000/user')
       const jsonFriends = await resFriends.json()
-      // console.log('jsonFriends', jsonFriends)
+      // for ( let i = 0; i < jsonFriends.length; i) {
+      //   if (jsonFriends[i].username === route.params.username) {
+      //     delete jsonFriends[i]
+      //   }
+      // }
+      console.log('jsonFriends', jsonFriends)
       setFriendsList(jsonFriends)
     } catch (err) {
       console.log('fetching error friendslist', err)
@@ -55,7 +60,7 @@ const Dashboard = ({navigation, route}) => {
   }
 
   const renderMenuItem = ({item}) => {
-    const backgroundColor = item._id === selectedMenuId._id ? "#6e3b6e" : "#f9c2ff";
+    const backgroundColor = item._id === selectedMenuId._id ? "#465881" : "#818181";
     const color = item._id === selectedMenuId._id ? 'white' : 'black';
 
     return (
@@ -68,7 +73,7 @@ const Dashboard = ({navigation, route}) => {
     );
     }
     const renderFriendItem = ({item}) => {
-      const backgroundColor = item._id === selectedFriendId._id ? "#6e3b6e" : "#f9c2ff";
+      const backgroundColor = item._id === selectedFriendId._id ? "#465881" : "#818181";
       const color = item._id === selectedFriendId._id ? 'white' : 'black';
   
       return (
@@ -81,10 +86,23 @@ const Dashboard = ({navigation, route}) => {
       );
       }
 
-      const sendSession = () => {
-        console.log(selectedFriendId)
-        console.log(selectedMenuId)
-        console.log(route.params)
+      async function sendSession () {
+        //  console.log(selectedFriendId._id)
+        // console.log(selectedMenuId._id)
+        // console.log(route.params._id)
+        
+        try {
+          const res = await fetch(`http://10.10.22.147:3000/session/${route.params._id}/${selectedFriendId._id}/${selectedMenuId._id}`, {method:'POST'})
+          const data = await res.json()
+          console.log('json session', data)
+          setData(data)
+        navigation.navigate('Swipes', data)
+
+        } catch (err) {
+          console.log('fetching error', err)
+        }
+       
+        
       }
 
 
@@ -97,20 +115,20 @@ const Dashboard = ({navigation, route}) => {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
      <FlatList 
      data = {menuList}
      renderItem = {renderMenuItem}
      keyExtractor ={item => item._id}
      extraData = {selectedMenuId}
-     ListHeaderComponent= {<Text>Menus</Text>}
+     ListHeaderComponent= {<Text style={styles.titleHeader}>Menus</Text>}
     />
     <FlatList 
      data = {friendsList}
      renderItem = {renderFriendItem}
      keyExtractor ={item => item._id}
      extraData = {selectedFriendId}
-     ListHeaderComponent= {<Text>Friends</Text>}
+     ListHeaderComponent= {<Text style={styles.titleHeader}>Friends</Text>}
 
 
     />
@@ -118,6 +136,7 @@ const Dashboard = ({navigation, route}) => {
  
     <TouchableOpacity
       onPress = {() => sendSession()}
+      style={styles.button}
     
     ><Text>Send</Text></TouchableOpacity>
 
@@ -128,15 +147,25 @@ const Dashboard = ({navigation, route}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    justifyContent: 'center'
+  },
+  button:{
+    justifyContent:'center',
+    alignItems: 'center',
+    margin: 50,
+    padding: 20,
+    borderRadius:8,
+    backgroundColor: '#465881'
   },
   item: {
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
   },
-  title: {
+  titleHeader: {
     fontSize: 32,
+    paddingHorizontal:125,
+    padding: 20,
   },
 });
 

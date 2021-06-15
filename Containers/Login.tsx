@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react'
-import { View, Text, TouchableOpacity, Image, StyleSheet, TextInput } from 'react-native'
+import { ScrollView,View, Text, TouchableOpacity, Image, StyleSheet, TextInput } from 'react-native'
 
 
 
@@ -10,6 +10,7 @@ const Login = ({navigation}) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
+  const [data, setData] = useState('')
 
   async function Login () {
     
@@ -17,8 +18,19 @@ const Login = ({navigation}) => {
       const res = await fetch(`http://10.10.22.147:3000/user/${username}`)
       const userInfo = await res.json()
       console.log('json', userInfo)
-      if (userInfo !== false){
+      if (userInfo.sessionList.length == 0){
         navigation.navigate('Dashboard', userInfo)
+      } else if (userInfo.sessionList.length !== 0){
+        try {
+          const res = await fetch(`http://10.10.22.147:3000/session/${userInfo.sessionList[0]}`)
+          const data = await res.json()
+          console.log('json session', data)
+          setData(data)
+          navigation.navigate('Swipes', data)
+
+        } catch (err) {
+          console.log('fetching error', err)
+        }
       } else {
         console.log('access denied')
         return (
@@ -71,10 +83,9 @@ const Login = ({navigation}) => {
             onChangeText={text => setPassword(text)}/>
         </View>
       <TouchableOpacity
-      style={styles.inputText}
+      style={styles.button}
         onPress={() => Login()}>
-        <Text>Login</Text>
-        <Text>---------------------------</Text> 
+        <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
       <View style={styles.inputView} >
           <TextInput  
@@ -100,9 +111,9 @@ const Login = ({navigation}) => {
         </View>
         
       <TouchableOpacity
-      style={styles.inputText}
+      style={styles.button}
         onPress={() => SignUp()}>
-        <Text>Sign up</Text>
+        <Text style={styles.buttonText}>Sign up</Text>
       </TouchableOpacity>
 
     </View> 
@@ -113,15 +124,30 @@ const Login = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop:10,
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  button:{
+    justifyContent:'center',
+    alignItems: 'center',
+    paddingHorizontal:80,
+    marginVertical:10,
+    marginBottom:20,
+    height: 50,
+    borderRadius:8,
+    backgroundColor: '#465881'
+  },
+  buttonText:{
+    color:'white',
+
   },
   inputView:{
     width:"80%",
     backgroundColor:"#465881",
     borderRadius:25,
-    height:50,
+    height:40,
     marginBottom:20,
     justifyContent:"center",
     padding:20

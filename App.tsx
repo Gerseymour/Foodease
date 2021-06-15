@@ -3,6 +3,7 @@ import Swipes from './Containers/Swipes'
 import Login from './Containers/Login'
 import Dashboard from './Containers/Dashboard'
 import {SafeAreaView} from 'react-native'
+import Results from './Containers/Results'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import React from 'react';
@@ -19,6 +20,7 @@ export default function App() {
       <Stack.Screen name='Login' component={Login}/>
       <Stack.Screen name='Dashboard' component={Dashboard}/>
       <Stack.Screen name='Swipes' component={Swipes}/>
+      <Stack.Screen name='Result' component={Results}/>
     </Stack.Navigator>
     
   </NavigationContainer>

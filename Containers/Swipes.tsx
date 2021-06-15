@@ -5,14 +5,14 @@ import { Food, Menu } from '../Components/Model'
 import Card from '../Components/Card'
 import Swiper from 'react-native-deck-swiper';
 
-export default function Swipes ({route}) {
+export default function Swipes ({navigation, route}) {
 
   const [index, setIndex] = useState(0);
   const [likes, setLikes] = useState([]);
   const [isComplete, setIsCompleted] = useState(false)
   const [result, setResult] = useState({})
   const [data, setData] = useState([])
-  const {title, _id} = route.params
+  const {menu_id} = route.params
 
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function Swipes ({route}) {
 
   async function getData () {
     try {
-      const res = await fetch(`http://10.10.22.147:3000/menu/${_id}`)
+      const res = await fetch(`http://10.10.22.147:3000/menu/${menu_id}`)
       const json = await res.json()
       console.log('json', json)
       setData(json)
@@ -45,10 +45,27 @@ export default function Swipes ({route}) {
     })
   }
 
+  async function putSession () {
+    try {
+      const res = await fetch(`http://10.10.22.147:3000/session/${route.params._id}`, 
+      {
+        method:'PUT',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(likes)
+      })
+      const datasession = await res.json()
+      console.log(datasession, 'json put update')
+      // setData(data)
+      if (isComplete){
+      navigation.navigate('Result', datasession )
+      }
+    } catch (err) {
+      console.log('putting error', err)
+    }
+  }
   useEffect(() => {
-    const random = Math.floor(Math.random() *likes.length)
-    console.log(random)
-    setResult(likes[random])
+    putSession()
+
   },[isComplete])
 
   
@@ -60,19 +77,14 @@ export default function Swipes ({route}) {
     )
   }
 
-  if (result) {
-    return (
-      <Card card={result} color={true}/>
-    )
-  }
-
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.titleContainer}>
+        <View style={styles.titleContainer}>
         <Text style= {styles.menuTitle} > {data.title}</Text>
+        </View>
         <Swiper
-          backgroundColor={'white'}
+          backgroundColor={'transparent'}
           cardIndex= {index}
           cards = {data.items}
           renderCard= {(card:Food)=> <Card card={card}/>}
@@ -91,7 +103,6 @@ export default function Swipes ({route}) {
             right:overlayRight
           }}
           />
-      </View>
 
     </SafeAreaView>
   );
@@ -99,20 +110,20 @@ export default function Swipes ({route}) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor:'white'
+    backgroundColor:'white',
   },
-  swiperContainer:{
-    flex:0.5
-  },
+
   titleContainer:{
     paddingTop:10,
+    marginBottom:10,
     backgroundColor:'white',
     alignItems: 'center',
     justifyContent: 'center'
   },
   menuTitle: {
-    
-
+    paddingTop:10,
+    color:'black',
+    fontSize:32
   },
   
 });

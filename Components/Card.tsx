@@ -3,16 +3,16 @@ import React from 'react'
 import {Food} from './Model'
 
 
-const Card = ({card, color}) => {
-  let result = ''
-  if (color) {
-    result = {backgroundColor: 'yellow'}
-  }
+const Card = ({card}) => {
+  
+  
   return (
-    <View style={[styles.card, result]}>
+    <View style={[styles.card]}>
       <Text style={styles.cardEmoji}>{card.emoji}</Text>
       <Text style={styles.cardTitle}>{card.title} </Text>
-      <Text style={styles.cardDescription}>{card.additionalInfo} </Text>
+      <View style={styles.cardDescriptionContainer}>
+        <Text style={styles.cardDescription}>{card.additionalInfo} </Text>
+      </View>
     </View>
 
   )
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   card:{
     backgroundColor:'#f3efef',
     borderRadius:8,
+    marginTop:50,
     flex:0.75,
     alignItems: 'center',
     justifyContent:'center',
@@ -33,11 +34,19 @@ const styles = StyleSheet.create({
   },
   cardTitle:{
     color:'#434343',
-    fontSize:18,
+    fontSize:32,
     fontWeight:'bold'
   },
   cardEmoji:{
+    margin:15,
     fontSize:200
+  },
+  cardDescriptionContainer: {
+    padding: 40
+  },
+  cardDescription: {
+    fontSize:18,
+    color:'#818181'
   }
 })
 
