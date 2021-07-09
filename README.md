@@ -12,10 +12,10 @@
   
   Friends and partners are able to send each other a list of foods and swipe through them choosing yes or no secretly and then recieve a final decisions on what to eat!
 
-<code><img height="400" alt="Typescript" src="https://user-images.githubusercontent.com/61637775/125140563-b6ef7100-e10a-11eb-9eee-1c5d99e85172.jpeg"></code>
-<code><img height="400" alt="Typescript" src="https://user-images.githubusercontent.com/61637775/125140558-b5be4400-e10a-11eb-87dd-96937388fdc5.jpeg"></code>
-<code><img height="400" alt="Typescript" src="https://user-images.githubusercontent.com/61637775/125140564-b6ef7100-e10a-11eb-8853-c03f7f090114.jpeg"></code>
-<code><img height="400" alt="Typescript" src="https://user-images.githubusercontent.com/61637775/125140559-b656da80-e10a-11eb-9a4e-931ba4c13c0b.jpeg"></code>
+<code><img height="350" alt="Typescript" src="https://user-images.githubusercontent.com/61637775/125140563-b6ef7100-e10a-11eb-9eee-1c5d99e85172.jpeg"></code>
+<code><img height="350" alt="Typescript" src="https://user-images.githubusercontent.com/61637775/125140558-b5be4400-e10a-11eb-87dd-96937388fdc5.jpeg"></code>
+<code><img height="350" alt="Typescript" src="https://user-images.githubusercontent.com/61637775/125140564-b6ef7100-e10a-11eb-8853-c03f7f090114.jpeg"></code>
+<code><img height="350" alt="Typescript" src="https://user-images.githubusercontent.com/61637775/125140559-b656da80-e10a-11eb-9a4e-931ba4c13c0b.jpeg"></code>
 
 
 ## Getting Started
