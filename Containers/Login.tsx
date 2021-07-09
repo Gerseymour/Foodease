@@ -49,7 +49,6 @@ const Login = ({navigation}) => {
       })
       
       const userInfo = await res.json()
-      console.log('json signup', userInfo)
         navigation.navigate('Dashboard', userInfo)
     } catch (err) {
       console.log('fetching error', err)

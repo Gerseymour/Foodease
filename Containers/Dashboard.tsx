@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import {TouchableOpacity, SafeAreaView, Text, FlatList, StyleSheet} from 'react-native';
+import {TouchableOpacity, SafeAreaView, Text, FlatList, StyleSheet, View} from 'react-native';
 const ipAddress = '10.10.22.103'
 
 const Item = ({ item, onPress, backgroundColor, textColor}) => (
@@ -37,7 +37,6 @@ const Dashboard = ({navigation, route}) => {
       }
 
     })
-    console.log('list', list)
     setMenuList(list)
     
   }
@@ -100,38 +99,47 @@ const Dashboard = ({navigation, route}) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text style={styles.instructionHeader}>Select a menu and a friends</Text>
+      <Text style={styles.titleHeader}>Menus</Text>
+      <View style={styles.menuView}>
      <FlatList 
      data = {menuList}
      renderItem = {renderMenuItem}
      keyExtractor ={item => item._id}
      extraData = {selectedMenuId}
-     ListHeaderComponent= {<Text style={styles.titleHeader}>Menus</Text>}
     />
+    </View>
+
+    <Text style={styles.titleHeader}>Friends</Text>
+    <View style={styles.menuView}>
     <FlatList 
      data = {friendsList}
      renderItem = {renderFriendItem}
      keyExtractor ={item => item._id}
      extraData = {selectedFriendId}
-     ListHeaderComponent= {<Text style={styles.titleHeader}>Friends</Text>}
-
-
     />
-
+    </View>
  
     <TouchableOpacity
       onPress = {() => sendSession()}
       style={styles.button}
     
-    ><Text>Send</Text></TouchableOpacity>
+    ><Text style={styles.send}>Send</Text></TouchableOpacity>
 
   </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
+  menuView: {
+    height: 150
+  },
   container: {
     flex: 1,
     justifyContent: 'center'
+  },
+  send:{
+    color: 'white'
   },
   button:{
     justifyContent:'center',
@@ -142,6 +150,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#465881'
   },
   item: {
+    borderRadius: 10,
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
@@ -149,8 +158,17 @@ const styles = StyleSheet.create({
   titleHeader: {
     fontSize: 32,
     paddingHorizontal:125,
-    padding: 20,
+    padding: 10,
+    fontWeight:'bold',
   },
+  instructionHeader:{
+    width:'100%',
+    fontSize: 32,
+    alignSelf: 'center',
+    textAlign: 'center',
+    paddingHorizontal:25,
+    padding: 10,
+  },  
 });
 
 export default Dashboard
