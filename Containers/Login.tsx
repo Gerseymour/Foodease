@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react'
-import { ScrollView,View, Text, TouchableOpacity, Image, StyleSheet, TextInput } from 'react-native'
-
+import { View, Text, TouchableOpacity, Image, StyleSheet, TextInput } from 'react-native'
+const ipAddress = '10.10.22.103'
 
 
 
@@ -15,26 +15,21 @@ const Login = ({navigation}) => {
   async function Login () {
     
     try {
-      const res = await fetch(`http://10.10.22.147:3000/user/${username}`)
+      const res = await fetch(`http://${ipAddress}:3000/user/${username}`)
       const userInfo = await res.json()
-      console.log('json', userInfo)
       if (userInfo.sessionList.length == 0){
         navigation.navigate('Dashboard', userInfo)
       } else if (userInfo.sessionList.length !== 0){
         try {
-          const res = await fetch(`http://10.10.22.147:3000/session/${userInfo.sessionList[0]}`)
+          const res = await fetch(`http://${ipAddress}:3000/session/${userInfo.sessionList[0]}`)
           const data = await res.json()
-          console.log('json session', data)
           setData(data)
           navigation.navigate('Swipes', data)
 
         } catch (err) {
-          console.log('fetching error', err)
         }
       } else {
-        console.log('access denied')
         return (
-          // ##TODO FAILPAGE
           <View>
             <Text>Invalid username or password</Text> 
           </View>
@@ -47,7 +42,7 @@ const Login = ({navigation}) => {
 
   async function SignUp () {
     try {
-      const res = await fetch('http://10.10.22.147:3000/user', { 
+      const res = await fetch(`http://${ipAddress}:3000/user`, { 
         method:'POST', 
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({username, passwordHash:password, email})

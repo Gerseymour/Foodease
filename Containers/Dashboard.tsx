@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import {TouchableOpacity, SafeAreaView,StatusBar, Text, FlatList, ScrollView, StyleSheet} from 'react-native';
-
+import {TouchableOpacity, SafeAreaView, Text, FlatList, StyleSheet} from 'react-native';
+const ipAddress = '10.10.22.103'
 
 const Item = ({ item, onPress, backgroundColor, textColor}) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
@@ -29,9 +29,8 @@ const Dashboard = ({navigation, route}) => {
     const list =[]
     route.params.menuList.forEach(async id =>{
       try {
-        const resMenu = await fetch(`http://10.10.22.147:3000/menu/${id}`)
+        const resMenu = await fetch(`http://${ipAddress}:3000/menu/${id}`)
         const jsonMenu = await resMenu.json()
-        // console.log('jsonMenu', jsonMenu)
         list.push(jsonMenu)
       } catch (err) {
         console.log('fetching error menu list', err)
@@ -43,16 +42,9 @@ const Dashboard = ({navigation, route}) => {
     
   }
   async function getFriendsList () {
-    const friendsArray = []
     try {
-      const resFriends = await fetch('http://10.10.22.147:3000/user')
+      const resFriends = await fetch(`http://${ipAddress}:3000/user`)
       const jsonFriends = await resFriends.json()
-      // for ( let i = 0; i < jsonFriends.length; i) {
-      //   if (jsonFriends[i].username === route.params.username) {
-      //     delete jsonFriends[i]
-      //   }
-      // }
-      console.log('jsonFriends', jsonFriends)
       setFriendsList(jsonFriends)
     } catch (err) {
       console.log('fetching error friendslist', err)
@@ -87,22 +79,14 @@ const Dashboard = ({navigation, route}) => {
       }
 
       async function sendSession () {
-        //  console.log(selectedFriendId._id)
-        // console.log(selectedMenuId._id)
-        // console.log(route.params._id)
-        
         try {
-          const res = await fetch(`http://10.10.22.147:3000/session/${route.params._id}/${selectedFriendId._id}/${selectedMenuId._id}`, {method:'POST'})
+          const res = await fetch(`http://${ipAddress}:3000/session/${route.params._id}/${selectedFriendId._id}/${selectedMenuId._id}`, {method:'POST'})
           const data = await res.json()
-          console.log('json session', data)
           setData(data)
-        navigation.navigate('Swipes', data)
-
+          navigation.navigate('Swipes', data)
         } catch (err) {
           console.log('fetching error', err)
         }
-       
-        
       }
 
 

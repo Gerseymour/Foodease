@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { Food, Menu } from '../Components/Model'
-// import data from '../Menu';
+import { Food} from '../Components/Model'
 import Card from '../Components/Card'
 import Swiper from 'react-native-deck-swiper';
+
+const ipAddress = '10.10.22.103'
 
 export default function Swipes ({navigation, route}) {
 
@@ -16,16 +17,13 @@ export default function Swipes ({navigation, route}) {
 
 
   useEffect(() => {
-    console.log('params',route.params)
-    console.log('in fetch effect')
     getData()
   }, [])
 
   async function getData () {
     try {
-      const res = await fetch(`http://10.10.22.147:3000/menu/${menu_id}`)
+      const res = await fetch(`http://${ipAddress}:3000/menu/${menu_id}`)
       const json = await res.json()
-      console.log('json', json)
       setData(json)
     } catch (err) {
       console.log('fetching error', err)
@@ -33,10 +31,7 @@ export default function Swipes ({navigation, route}) {
   }
   
   const onSwiped = (card:number) => {
-    console.log(data.items[card].title)
-
-    setIndex(index +1)
-    ;
+    setIndex(index +1);
   }
 
   const liked = (card:number) => {
@@ -47,15 +42,13 @@ export default function Swipes ({navigation, route}) {
 
   async function putSession () {
     try {
-      const res = await fetch(`http://10.10.22.147:3000/session/${route.params._id}`, 
+      const res = await fetch(`http:/${ipAddress}:3000/session/${route.params._id}`, 
       {
         method:'PUT',
         headers:{'Content-Type':'application/json'},
         body: JSON.stringify(likes)
       })
       const datasession = await res.json()
-      console.log(datasession, 'json put update')
-      // setData(data)
       if (isComplete){
       navigation.navigate('Result', datasession )
       }

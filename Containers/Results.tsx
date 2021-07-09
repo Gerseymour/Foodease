@@ -4,7 +4,6 @@ import {SafeAreaView, Text, TouchableOpacity, Image, StyleSheet} from 'react-nat
 
 const Results = ({navigation, route}) => {
 
-  console.log(route.params,'results')
   if (route.params.loading === 'loading') {
   return (
     <SafeAreaView style={styles.container}>
@@ -19,12 +18,15 @@ const Results = ({navigation, route}) => {
 
   )
 }
-return (
-<SafeAreaView style={styles.containerCard}><Card card={route.params} />
-<TouchableOpacity
-      style={styles.button}
-      onPress={() =>navigation.navigate('Login')}
-      ><Text> return home</Text></TouchableOpacity></SafeAreaView>
+  return (
+    <SafeAreaView style={styles.containerCard}><Card card={route.params} />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() =>navigation.navigate('Login')}
+      >
+       <Text> return home</Text>
+      </TouchableOpacity>
+  </SafeAreaView>
 )
 }
 
