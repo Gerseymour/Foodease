@@ -37,7 +37,7 @@ In order to run Foodease the expo phone app is required and scan the QR code. Ad
 7. Create an environment file to the env template specifications.
 8. Run ````nest start````  from the sever root in order to start up the back-end.
 9. Populate menu database based on the Menu.json in client to the ````/menu```` POST request in postman
-10. App should be fullly functional :star:
+10. App should be fully functional :star:
 
 ## Features
  - Users can log in and creat an account.
