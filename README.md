@@ -13,7 +13,7 @@
   
   Friends and partners are able to send each other a list of foods and swipe through them choosing yes or no secretly and then recieve a final decisions on what to eat!
 
-<code><img height="400" alt="FoodEase demo" src="https://user-images.githubusercontent.com/61637775/125164707-7552da80-e18b-11eb-96c6-2f142a41e5e3.png"></code>
+<code><img height="400" alt="FoodEase demo" src="https://user-images.githubusercontent.com/61637775/125168578-1e0a3580-e19e-11eb-9910-5a589100b929.png"></code>
 
 
 ## Getting Started
