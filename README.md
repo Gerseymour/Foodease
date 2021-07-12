@@ -7,11 +7,11 @@
 - [Future Features](#Future-Features)
 - [Technologies](#Technologies)
 ## Introduction
-  Having trouble deciding what to eat with your partner? Taking too look to agree on which restaurant to go to that it ends up closing before you've chose?
-  
-  FoodEase is here to help prevent squabbling, arguing and time wasting when is comes to food decisions.
-  
-  Friends and partners are able to send each other a list of foods and swipe through them choosing yes or no secretly and then recieve a final decisions on what to eat!
+Having trouble deciding what to eat with your partner? Taking too look to agree on which restaurant to go to that it ends up closing before you've chosen?
+
+FoodEase is here to help prevent squabbling, arguing, and time-wasting when it comes to food decisions.
+
+Friends and partners are able to send each other a list of foods and swipe through them choosing yes or no secretly and then receive a final decision on what to eat!
 
 <code><img height="400" alt="FoodEase demo" src="https://user-images.githubusercontent.com/61637775/125168578-1e0a3580-e19e-11eb-9910-5a589100b929.png"></code>
 
